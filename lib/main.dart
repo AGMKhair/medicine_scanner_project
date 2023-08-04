@@ -36,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   String text = "";
   final StreamController<String> controller = StreamController<String>();
 
@@ -75,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 getScannedText: (value) {
                   setText(value);
                 }),
+            const Text('This scanner can scan only medicines.'),
             StreamBuilder<String>(
               stream: controller.stream,
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -86,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 }
 
 class Result extends StatelessWidget {
@@ -98,6 +101,6 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Readed text: $text");
+    return Text("Name of Medicine : $text");
   }
 }
