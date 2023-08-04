@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Scalable OCR',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -51,38 +52,39 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ScalableOCR(
-                  paintboxCustom: Paint()
-                    ..style = PaintingStyle.stroke
-                    ..strokeWidth = 4.0
-                    ..color = const Color.fromARGB(153, 102, 160, 241),
-                  boxLeftOff: 5,
-                  boxBottomOff: 2.5,
-                  boxRightOff: 5,
-                  boxTopOff: 2.5,
-                  boxHeight: MediaQuery.of(context).size.height / 3,
-                  getRawData: (value) {
-                    inspect(value);
-                  },
-                  getScannedText: (value) {
-                    setText(value);
-                  }),
-              StreamBuilder<String>(
-                stream: controller.stream,
-                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  return Result(text: snapshot.data != null ? snapshot.data! : "");
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            ScalableOCR(
+                paintboxCustom: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 4.0
+                  ..color = const Color.fromARGB(153, 102, 160, 241),
+                boxLeftOff: 5,
+                boxBottomOff: 2.5,
+                boxRightOff: 5,
+                boxTopOff: 2.5,
+                boxHeight: MediaQuery.of(context).size.height / 3,
+                getRawData: (value) {
+                  inspect(value);
                 },
-              )
-            ],
-          ),
-        ));
+                getScannedText: (value) {
+                  setText(value);
+                }),
+            StreamBuilder<String>(
+              stream: controller.stream,
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                return Result(text: snapshot.data != null ? snapshot.data! : "");
+              },
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
