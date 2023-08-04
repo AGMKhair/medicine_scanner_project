@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Scanner',
         child: const Icon(Icons.qr_code_scanner),
+
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
